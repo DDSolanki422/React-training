@@ -14,7 +14,7 @@ export default class FilteredList extends React.Component{
     handleChange(e){
         let val=e.target.value;
         var filteredItems=this.props.items.filter(function(element){
-            return element.search(val) !== -1;
+            return element.toLowerCase().search(val) !== -1;
         })
         this.setState({filteritems:filteredItems})
 
@@ -22,7 +22,7 @@ export default class FilteredList extends React.Component{
     render(){
         return (
             <section>
-                <input type="text" onInput={this.handleChange} defaultValue={this.state.filterValue}/>
+                Filter Input: <input type="text" onInput={this.handleChange} defaultValue={this.state.filterValue}/>
                 <ul>
                     {this.state.filteritems.map(function(item){
                         return <li key={item}>{item}</li>

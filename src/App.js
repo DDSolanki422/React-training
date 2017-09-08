@@ -9,6 +9,7 @@ import GenericComponent from './GenericComponent'
 import TwoWayDataBinding from './TwoWayDataBinding';
 import AjaxExample from './Ajax-example'
 import FilteredList from './Filtered-list'
+import $ from 'jquery'
 
 
 class App extends Component {
@@ -38,8 +39,8 @@ class App extends Component {
         <GenericComponent />
         <hr/>
         <TwoWayDataBinding />
-       {//<AjaxExample /> 
-       }
+        <AjaxExample  pr={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')}/> 
+       
         <hr/>
         <FilteredList />
       </section>

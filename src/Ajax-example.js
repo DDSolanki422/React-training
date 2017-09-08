@@ -7,26 +7,29 @@ export default class AjaxExample extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            username: '',
-            lastGistUrl: ''
+            items:[]
         }
     }
     componentWillMount(){
         var self=this;
-        axios.get('https://api.github.com/users/octocat/gists').then((res)=>{
+        this.props.pr.then((res)=>{
             console.log(res);
-            res=res.data;
-            this.setState({username:res[0].owner.login,
-                lastGistUrl:res[0].html_url})
+            res=res.items;
+            this.setState({items:res});         
         })
 
         
     }
     render(){
        return (
-        <div>
-            {this.state.username}: last gist is <a href={this.state.lastGistUrl}>here</a>.
-        </div>
+        <ul>
+            {this.state.items.map((item,index)=>{
+                return (<li keys={item.id+'-index-'+index}>
+                        <p> {index+1}. JS Name: {item.name}</p>
+                        <p>Stars: {item.stargazers_count}</p>
+                </li>);
+            })}
+        </ul>
        );
         
     }
